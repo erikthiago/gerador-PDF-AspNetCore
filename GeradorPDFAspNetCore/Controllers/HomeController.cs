@@ -1,6 +1,8 @@
 ﻿using GeradorPDFAspNetCore.Models;
+using jsreport.AspNetCore;
+using jsreport.Types;
 using Microsoft.AspNetCore.Mvc;
-using Rotativa.NetCore;
+using Rotativa.AspNetCore;
 using System;
 
 namespace GeradorPDFAspNetCore.Controllers
@@ -17,11 +19,28 @@ namespace GeradorPDFAspNetCore.Controllers
             Person person = new Person()
             {
                 Id = Guid.NewGuid(),
-                Name = "Érik",
-                LastName = "Thiago"
+                Name = "Primeiro",
+                LastName = "Ultimo"
             };
 
-            return new ViewAsPdf(person);
+            var pdf = new ViewAsPdf(person);
+
+            return pdf;
+        }
+
+        [MiddlewareFilter(typeof(JsReportPipeline))]
+        public IActionResult JSReportPDF()
+        {
+            Person person = new Person()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Primeiro",
+                LastName = "Ultimo"
+            };
+
+            HttpContext.JsReportFeature().Recipe(Recipe.PhantomPdf);
+
+            return View(person);
         }
     }
 }
