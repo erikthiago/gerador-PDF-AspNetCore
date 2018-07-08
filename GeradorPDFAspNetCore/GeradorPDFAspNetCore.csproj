@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="jsreport.AspNetCore" Version="1.0.1" />
     <PackageReference Include="jsreport.Binary" Version="1.10.0" />
     <PackageReference Include="jsreport.Local" Version="1.1.2" />
@@ -13,6 +14,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Rotativa.AspNetCore" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\DinkToPDF.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="libwkhtmltox.dylib">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
