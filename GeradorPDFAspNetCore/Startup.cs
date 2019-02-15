@@ -30,7 +30,7 @@ namespace GeradorPDFAspNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Configuração do JS Report para gerar o relatório em PDF
             services.AddJsReport(new LocalReporting()
@@ -52,6 +52,13 @@ namespace GeradorPDFAspNetCore
 
             // Configuração do conversor de razor views para string
             services.AddScoped<IViewRenderService, ViewRenderService>();
+
+            services.AddCors(options => {
+                options.AddPolicy("AllowDev",
+                 builder => builder.WithOrigins("*").AllowAnyHeader()
+                    .AllowAnyMethod()
+                 );
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +67,7 @@ namespace GeradorPDFAspNetCore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("AllowDev");
             }
             else
             {

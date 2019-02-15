@@ -37,7 +37,7 @@ namespace GeradorPDFAspNetCore.Controllers
                 ColorMode = ColorMode.Color,
                 Orientation = Orientation.Landscape,
                 PaperSize = PaperKind.A4Plus,
-            },
+                },
                 Objects = {
                     new ObjectSettings() {
                         PagesCount = true,
